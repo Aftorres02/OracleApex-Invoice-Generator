@@ -1,0 +1,81 @@
+---
+- # ====== List of Values: INVG_CLIENTS.NAME ===================
+  id: 78780437001686924
+  identification: 
+    name: INVG_CLIENTS.NAME
+
+  subscription: 
+    version-number: 41749427708875
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INVG_CLIENTS
+
+  column-mapping: 
+    return: INVG_CLIENT_ID
+    display: NAME
+    default-sort: NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: INVG_BUSINESSES.NAME ================
+  id: 78781193834686922
+  identification: 
+    name: INVG_BUSINESSES.NAME
+
+  subscription: 
+    version-number: 41749427708882
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INVG_BUSINESSES
+
+  column-mapping: 
+    return: INVG_BUSINESS_ID
+    display: NAME
+    default-sort: NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: INVG_BANK_DETAILS.RECEIVER_NAME =====
+  id: 78781804473686922
+  identification: 
+    name: INVG_BANK_DETAILS.RECEIVER_NAME
+
+  subscription: 
+    version-number: 41749427708882
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INVG_BANK_DETAILS
+
+  column-mapping: 
+    return: INVG_BANK_DETAIL_ID
+    display: RECEIVER_NAME
+    default-sort: RECEIVER_NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: INVG_INVOICES.INVOICE_NUMBER ========
+  id: 79290323177270304
+  identification: 
+    name: INVG_INVOICES.INVOICE_NUMBER
+
+  subscription: 
+    version-number: 41749737028620
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INVG_INVOICES
+
+  column-mapping: 
+    return: INVG_INVOICE_ID
+    display: INVOICE_NUMBER
+    default-sort: INVOICE_NUMBER
+    sort-direction: Ascending (Nulls Last)
+

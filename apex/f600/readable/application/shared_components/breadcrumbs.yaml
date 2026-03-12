@@ -1,0 +1,52 @@
+---
+- # ====== Breadcrumb: Breadcrumb ==============================
+  id: 78754623299710235
+  identification: 
+    name: Breadcrumb
+
+  entries: 
+  - # ====== Entry: Home =========================================
+    id: 78754881427710235
+    identification: 
+      name: Home
+      page-number: 1
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+        page: 1 # Home
+
+  - # ====== Entry: Invoices =====================================
+    id: 78804224197686897
+    identification: 
+      name: Invoices
+      page-number: 100
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:100:&APP_SESSION.::&DEBUG.:::'
+        page: 100 # Invoices
+
+  - # ====== Entry: Print Invoice ================================
+    id: 79262920991467189
+    identification: 
+      name: Print Invoice
+      page-number: 120
+
+    execution: 
+      sequence: 10
+
+    appearance: 
+      parent-entry: Invoices # 78804224197686897
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:120:&APP_SESSION.::&DEBUG.:::'
+        page: 120 # Print Invoice
+

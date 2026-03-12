@@ -1,0 +1,189 @@
+---
+# ====== Page: Print Invoice =================================
+id: 120
+identification: 
+  name: Print Invoice
+  alias: PRINT-INVOICE
+  title: Print Invoice
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: true
+  resizable: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  file-urls: 
+  - '#APP_FILES#css/invg_invoice_print#MIN#.css'
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: RenderInvoice ===============================
+  id: 79260884605559844
+  identification: 
+    name: RenderInvoice
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: |
+      begin
+        htp.p(invg_invoice_api.render_invoice_html(
+          p_invoice_id => :P120_INVG_INVOICE_ID
+        ));
+      end;
+    page-items-to-submit: 
+    - P120_INVG_INVOICE_ID
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
+
+page-items: 
+- # ====== Page Item: P120_INVG_INVOICE_ID =====================
+  id: 79260946129559845
+  identification: 
+    name: P120_INVG_INVOICE_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: RenderInvoice # 79260884605559844
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: PRINT =======================================
+  id: 79261088042559846
+  identification: 
+    button-name: PRINT
+    label: Print
+
+  layout: 
+    sequence: 10
+    region: RenderInvoice # 79260884605559844
+    slot: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconLeft
+    icon: fa-print
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+dynamic-actions: 
+- # ====== Dynamic Action: onClick print invoice ===============
+  id: 79261184550559847
+  identification: 
+    name: onClick print invoice
+
+  execution: 
+    sequence: 10
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Click
+    selection-type: Button
+    button: PRINT # 79261088042559846
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 79261233149559848
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: window.print();
+
+    execution: 
+      sequence: 10
+      event: onClick print invoice # 79261184550559847
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
