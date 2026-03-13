@@ -1,6 +1,6 @@
 # Oracle APEX Invoice Generator
 
-An Oracle APEX application (App 600) for generating and managing invoices, including clients, businesses, bank details, and printable invoice output.
+An Oracle APEX application (App 600) for generating and managing invoices, including recipients, senders, bank details, and printable invoice output.
 
 ## Project Structure
 
@@ -22,7 +22,7 @@ An Oracle APEX application (App 600) for generating and managing invoices, inclu
 
 | Type | Objects |
 |------|---------|
-| Tables | `invg_clients`, `invg_businesses`, `invg_bank_details`, `invg_invoices`, `invg_invoice_lines` |
+| Tables | `invg_recipients`, `invg_senders`, `invg_bank_details`, `invg_invoices`, `invg_invoice_lines` |
 | Views | `invg_invoices_vw`, `invg_invoice_lines_vw` |
 | Packages | `invg_invoice_api` |
 | Triggers | Compound audit triggers for each table |
