@@ -1,8 +1,8 @@
 -- -----------------------------------------------------------------------------
--- Compound trigger: invg_clients audit columns
+-- Compound trigger: invg_senders audit columns
 -- -----------------------------------------------------------------------------
-create or replace trigger invg_clients_compound_trg
-for insert or update on invg_clients
+create or replace trigger invg_senders_compound_trg
+for insert or update on invg_senders
 compound trigger
 
   before each row is
@@ -17,5 +17,5 @@ compound trigger
     end if;
   end before each row;
 
-end invg_clients_compound_trg;
+end invg_senders_compound_trg;
 /

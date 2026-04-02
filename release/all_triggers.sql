@@ -3,9 +3,9 @@ prompt @../triggers/invg_invoices_compound_trg.sql
 @../triggers/invg_invoices_compound_trg.sql
 prompt @../triggers/invg_invoice_lines_compound_trg.sql
 @../triggers/invg_invoice_lines_compound_trg.sql
-prompt @../triggers/invg_clients_compound_trg.sql
-@../triggers/invg_clients_compound_trg.sql
-prompt @../triggers/invg_businesses_compound_trg.sql
-@../triggers/invg_businesses_compound_trg.sql
+prompt @../triggers/invg_recipients_compound_trg.sql
+@../triggers/invg_recipients_compound_trg.sql
+prompt @../triggers/invg_senders_compound_trg.sql
+@../triggers/invg_senders_compound_trg.sql
 prompt @../triggers/invg_bank_details_compound_trg.sql
 @../triggers/invg_bank_details_compound_trg.sql
