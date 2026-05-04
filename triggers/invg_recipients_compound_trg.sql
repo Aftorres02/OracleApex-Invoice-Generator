@@ -1,8 +1,8 @@
 -- -----------------------------------------------------------------------------
--- Compound trigger: invg_businesses audit columns
+-- Compound trigger: invg_recipients audit columns
 -- -----------------------------------------------------------------------------
-create or replace trigger invg_businesses_compound_trg
-for insert or update on invg_businesses
+create or replace trigger invg_recipients_compound_trg
+for insert or update on invg_recipients
 compound trigger
 
   before each row is
@@ -17,5 +17,5 @@ compound trigger
     end if;
   end before each row;
 
-end invg_businesses_compound_trg;
+end invg_recipients_compound_trg;
 /

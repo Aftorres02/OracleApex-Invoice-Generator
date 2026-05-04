@@ -31,7 +31,7 @@ advanced:
 
 authentication: 
   public-user: APEX_PUBLIC_USER
-  authentication-scheme: Oracle APEX Accounts # 78754391656710237
+  authentication-scheme: open # 79950401166922353
 
 authorization: 
   source-for-role-or-group-schemes: Access Control User Role Assignments
@@ -92,8 +92,9 @@ navigation-menu:
   list-template: Side Navigation Menu
   template-options: 
   - '#DEFAULT#'
-  - t-TreeNav--styleA
+  - js-defaultCollapsed
   - js-navCollapsed--hidden
+  - t-TreeNav--styleA
   list-position: Side
   list: Navigation Menu # 78755132104710232
 
@@ -107,6 +108,10 @@ navigation-bar:
 javascript: 
   include-jquery-migrate: false
 
+css: 
+  file-urls: 
+  - '#APP_FILES#css/y_n.css'
+
 attributes: 
   theme: Universal Theme # 42
   global-page: 0
@@ -115,7 +120,7 @@ attributes:
   auto-dismiss-success-messages: false
 
 subscription: 
-  version-number: 41749743191853
+  version-number: 41750129575608
 
 substitutions: 
 - # ====== Substitution: APP_NAME ==============================

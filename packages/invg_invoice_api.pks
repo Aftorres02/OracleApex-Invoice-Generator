@@ -11,17 +11,17 @@ as
   /**
    * Returns list of invoices for list page.
    *
-   * @param p_cursor ref cursor out: invg_invoice_id, invoice_number, client_name, issue_date
+   * @param p_cursor ref cursor out: invg_invoice_id, invoice_number, recipient_name, issue_date
    */
   procedure get_invoices(
     p_cursor out sys_refcursor
   );
 
   /**
-   * Returns one invoice header by id (joined to clients, businesses, bank_details for display).
+   * Returns one invoice header by id (joined to recipients, senders, bank_details for display).
    *
    * @param p_invoice_id invg_invoice_id
-   * @param p_cursor ref cursor out: invoice + client/business/bank display columns
+   * @param p_cursor ref cursor out: invoice + recipient/sender/bank display columns
    */
   procedure get_invoice(
     p_invoice_id   in  invg_invoices.invg_invoice_id%type

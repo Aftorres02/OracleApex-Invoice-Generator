@@ -56,13 +56,13 @@ regions:
            , i.tax_rate
            , i.other_amount
            , i.notes
-           , i.invg_client_id
-           , i.invg_business_id
+           , i.invg_sender_id
+           , i.invg_recipient_id
            , i.invg_bank_detail_id
-           , i.created_by
-           , i.created_on
-           , i.last_updated_by
-           , i.last_updated_on
+           -- , i.created_by
+           -- , i.created_on
+           -- , i.last_updated_by
+           -- , i.last_updated_on
            , i.active_yn
         from invg_invoices i
 
@@ -599,7 +599,7 @@ regions:
       id: 79259818970559834
       identification: 
         column-name: ACTIVE_YN
-        type: Plain Text
+        type: Y_N
 
       heading: 
         heading: Active?
@@ -608,9 +608,12 @@ regions:
       single-row-view: 
         use-column-heading: true
 
+      settings: 
+        value: ACTIVE_YN
+
       layout: 
         sequence: 100
-        column-alignment: start
+        column-alignment: center
 
       accessibility: 
         value-identifies-row: false
@@ -618,23 +621,8 @@ regions:
       source: 
         primary-key: false
 
-      column-filter: 
-        type: Default Based on Column Type
-
       enable-users-to: 
         hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
 
     printing: 
       output: 
@@ -718,6 +706,150 @@ regions:
       expand-shortcuts: false
 
 page-items: 
+- # ====== Page Item: P110_INVG_SENDER_ID ======================
+  id: 44565660975628442
+  identification: 
+    name: P110_INVG_SENDER_ID
+    type: Popup LOV
+
+  label: 
+    label: Sender
+    alignment: Left
+
+  settings: 
+    display-as: Inline Popup
+    initial-fetch: Automatic
+    manual-entry: false
+    fetch-on-search: false
+
+  search: 
+    match-type: Contains
+    case-sensitive: false
+    minimum-characters: 0
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 10
+    region: Invoice # 78776450084686934
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_INVOICE_SENDER # 78780437001686924
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Invoice # 78776450084686934
+    column: INVG_SENDER_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_INVG_RECIPIENT_ID ===================
+  id: 44565701715628443
+  identification: 
+    name: P110_INVG_RECIPIENT_ID
+    type: Popup LOV
+
+  label: 
+    label: Recipient
+    alignment: Left
+
+  settings: 
+    display-as: Inline Popup
+    initial-fetch: Automatic
+    manual-entry: false
+    fetch-on-search: true
+
+  search: 
+    match-type: Contains
+    case-sensitive: false
+    minimum-characters: 0
+
+  multiple-values: 
+    type: No
+
+  layout: 
+    sequence: 50
+    region: Invoice # 78776450084686934
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_INVOICE_RECIPIENT # 78781193834686922
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Invoice # 78776450084686934
+    column: INVG_RECIPIENT_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P110_INVG_INVOICE_ID =====================
   id: 78776781363686933
   identification: 
@@ -728,7 +860,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 10
+    sequence: 20
     region: Invoice # 78776450084686934
     slot: BODY
 
@@ -769,7 +901,7 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 40
+    sequence: 30
     region: Invoice # 78776450084686934
     slot: BODY
     alignment: Left
@@ -830,7 +962,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 70
+    sequence: 60
     region: Invoice # 78776450084686934
     slot: BODY
     alignment: Left
@@ -891,7 +1023,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 50
+    sequence: 40
     region: Invoice # 78776450084686934
     slot: BODY
     alignment: Left
@@ -947,7 +1079,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 80
+    sequence: 70
     region: Invoice # 78776450084686934
     slot: BODY
     alignment: Left
@@ -1217,134 +1349,6 @@ page-items:
     form-region: Invoice # 78776450084686934
     column: NOTES
     data-type: CLOB
-    query-only: false
-    primary-key: false
-
-  session-state: 
-    storage: Per Request (Memory Only)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P110_INVG_CLIENT_ID ======================
-  id: 78780350712686925
-  identification: 
-    name: P110_INVG_CLIENT_ID
-    type: Select List
-
-  label: 
-    label: Client
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-
-  multiple-values: 
-    type: No
-
-  layout: 
-    sequence: 20
-    region: Invoice # 78776450084686934
-    slot: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: INVG_CLIENTS.NAME # 78780437001686924
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: Invoice # 78776450084686934
-    column: INVG_CLIENT_ID
-    data-type: NUMBER
-    query-only: false
-    primary-key: false
-
-  session-state: 
-    storage: Per Request (Memory Only)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P110_INVG_BUSINESS_ID ====================
-  id: 78781097581686922
-  identification: 
-    name: P110_INVG_BUSINESS_ID
-    type: Select List
-
-  label: 
-    label: Business
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-
-  multiple-values: 
-    type: No
-
-  layout: 
-    sequence: 60
-    region: Invoice # 78776450084686934
-    slot: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: INVG_BUSINESSES.NAME # 78781193834686922
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: Invoice # 78776450084686934
-    column: INVG_BUSINESS_ID
-    data-type: NUMBER
     query-only: false
     primary-key: false
 

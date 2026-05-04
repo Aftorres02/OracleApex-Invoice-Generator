@@ -18,12 +18,12 @@ as
     open p_cursor for
     select i.invg_invoice_id
          , i.invoice_number
-         , c.name as client_name
+         , r.name as recipient_name
          , i.issue_date
       from invg_invoices i
-      left join invg_clients c
-        on c.invg_client_id = i.invg_client_id
-       and c.active_yn = 'Y'
+      left join invg_recipients r
+        on r.invg_recipient_id = i.invg_recipient_id
+       and r.active_yn = 'Y'
      where i.active_yn = 'Y'
      order by i.issue_date desc, i.invg_invoice_id desc;
   end get_invoices;
@@ -47,16 +47,16 @@ as
          , i.tax_rate
          , i.other_amount
          , i.notes
-         , i.invg_client_id
-         , c.name         as client_name
-         , c.address      as client_address
-         , c.email        as client_email
-         , c.phone        as client_phone
-         , i.invg_business_id
-         , b.name         as business_name
-         , b.address      as business_address
-         , b.email        as business_email
-         , b.phone        as business_phone
+         , i.invg_recipient_id
+         , r.name         as recipient_name
+         , r.address      as recipient_address
+         , r.email        as recipient_email
+         , r.phone        as recipient_phone
+         , i.invg_sender_id
+         , s.name         as sender_name
+         , s.address      as sender_address
+         , s.email        as sender_email
+         , s.phone        as sender_phone
          , i.invg_bank_detail_id
          , bk.receiver_name
          , bk.bank_name
@@ -65,12 +65,12 @@ as
          , bk.account_type
          , bk.bank_address
       from invg_invoices i
-      left join invg_clients c
-        on c.invg_client_id = i.invg_client_id
-       and c.active_yn = 'Y'
-      left join invg_businesses b
-        on b.invg_business_id = i.invg_business_id
-       and b.active_yn = 'Y'
+      left join invg_recipients r
+        on r.invg_recipient_id = i.invg_recipient_id
+       and r.active_yn = 'Y'
+      left join invg_senders s
+        on s.invg_sender_id = i.invg_sender_id
+       and s.active_yn = 'Y'
       left join invg_bank_details bk
         on bk.invg_bank_detail_id = i.invg_bank_detail_id
        and bk.active_yn = 'Y'
@@ -166,15 +166,15 @@ as
     l_other_amount          invg_invoices.other_amount%type;
     l_notes                 invg_invoices.notes%type;
 
-    l_client_name           invg_clients.name%type;
-    l_client_address        invg_clients.address%type;
-    l_client_email          invg_clients.email%type;
-    l_client_phone          invg_clients.phone%type;
+    l_recipient_name        invg_recipients.name%type;
+    l_recipient_address     invg_recipients.address%type;
+    l_recipient_email       invg_recipients.email%type;
+    l_recipient_phone       invg_recipients.phone%type;
 
-    l_business_name         invg_businesses.name%type;
-    l_business_address      invg_businesses.address%type;
-    l_business_email        invg_businesses.email%type;
-    l_business_phone        invg_businesses.phone%type;
+    l_sender_name           invg_senders.name%type;
+    l_sender_address        invg_senders.address%type;
+    l_sender_email          invg_senders.email%type;
+    l_sender_phone          invg_senders.phone%type;
 
     l_receiver_name         invg_bank_details.receiver_name%type;
     l_bank_name             invg_bank_details.bank_name%type;
@@ -238,7 +238,7 @@ as
     -- logger.log('START', l_scope, null, l_params);
 
     -- =================================================================
-    -- Fetch invoice header with client, business, bank joins
+    -- Fetch invoice header with recipient, sender, bank joins
     -- =================================================================
     select lpad(i.invoice_number, 3, '0') as invoice_number
          , i.issue_date
@@ -248,14 +248,14 @@ as
          , nvl(i.tax_rate, 0)
          , nvl(i.other_amount, 0)
          , i.notes
-         , c.name
-         , c.address
-         , c.email
-         , c.phone
-         , b.name
-         , b.address
-         , b.email
-         , b.phone
+         , r.name
+         , r.address
+         , r.email
+         , r.phone
+         , s.name
+         , s.address
+         , s.email
+         , s.phone
          , bk.receiver_name
          , bk.bank_name
          , bk.routing_number
@@ -270,14 +270,14 @@ as
          , l_tax_rate
          , l_other_amount
          , l_notes
-         , l_client_name
-         , l_client_address
-         , l_client_email
-         , l_client_phone
-         , l_business_name
-         , l_business_address
-         , l_business_email
-         , l_business_phone
+         , l_recipient_name
+         , l_recipient_address
+         , l_recipient_email
+         , l_recipient_phone
+         , l_sender_name
+         , l_sender_address
+         , l_sender_email
+         , l_sender_phone
          , l_receiver_name
          , l_bank_name
          , l_routing_number
@@ -285,12 +285,12 @@ as
          , l_account_type
          , l_bank_address
       from invg_invoices i
-      left join invg_clients c
-        on c.invg_client_id = i.invg_client_id
-       and c.active_yn = 'Y'
-      left join invg_businesses b
-        on b.invg_business_id = i.invg_business_id
-       and b.active_yn = 'Y'
+      left join invg_recipients r
+        on r.invg_recipient_id = i.invg_recipient_id
+       and r.active_yn = 'Y'
+      left join invg_senders s
+        on s.invg_sender_id = i.invg_sender_id
+       and s.active_yn = 'Y'
       left join invg_bank_details bk
         on bk.invg_bank_detail_id = i.invg_bank_detail_id
        and bk.active_yn = 'Y'
@@ -326,25 +326,25 @@ as
 
     l_html := l_html || '<div class="invoice-from">'
            || '<strong>From</strong><br>'
-           || esc(l_business_name) || '<br>'
-           || nl2br(l_business_address) || '<br>';
-    if l_business_email is not null then
-      l_html := l_html || esc(l_business_email) || '<br>';
+           || esc(l_sender_name) || '<br>'
+           || nl2br(l_sender_address) || '<br>';
+    if l_sender_email is not null then
+      l_html := l_html || esc(l_sender_email) || '<br>';
     end if;
-    if l_business_phone is not null then
-      l_html := l_html || esc(l_business_phone);
+    if l_sender_phone is not null then
+      l_html := l_html || esc(l_sender_phone);
     end if;
     l_html := l_html || '</div>';
 
     l_html := l_html || '<div class="invoice-to">'
            || '<strong>To</strong><br>'
-           || esc(l_client_name) || '<br>'
-           || nl2br(l_client_address) || '<br>';
-    if l_client_email is not null then
-      l_html := l_html || esc(l_client_email) || '<br>';
+           || esc(l_recipient_name) || '<br>'
+           || nl2br(l_recipient_address) || '<br>';
+    if l_recipient_email is not null then
+      l_html := l_html || esc(l_recipient_email) || '<br>';
     end if;
-    if l_client_phone is not null then
-      l_html := l_html || esc(l_client_phone);
+    if l_recipient_phone is not null then
+      l_html := l_html || esc(l_recipient_phone);
     end if;
     l_html := l_html || '</div>';
 

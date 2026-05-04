@@ -1,5 +1,5 @@
 -- =============================================================================
--- invg_invoices_vw - List view for invoices (id, number, client, date, subtotal)
+-- invg_invoices_vw - List view for invoices (id, number, recipient, date, subtotal)
 -- =============================================================================
 
 create or replace view invg_invoices_vw
@@ -14,17 +14,17 @@ with w_line_subtotal as (
 , w_inv as (
   select i.invg_invoice_id
        , i.invoice_number
-       , c.name as client_name
+       , r.name as recipient_name
        , i.issue_date
     from invg_invoices i
-    left join invg_clients c
-      on c.invg_client_id = i.invg_client_id
-     and c.active_yn = 'Y'
+    left join invg_recipients r
+      on r.invg_recipient_id = i.invg_recipient_id
+     and r.active_yn = 'Y'
    where i.active_yn = 'Y'
 )
 select w.invg_invoice_id
      , w.invoice_number
-     , w.client_name
+     , w.recipient_name
      , w.issue_date
      , nvl(l.line_subtotal, 0) as line_subtotal
   from w_inv w
