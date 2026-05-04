@@ -38,8 +38,8 @@ prompt check DB user is expected user
 declare
 begin
   dbms_output.put_line('User: ' || user);
-  if user != 'DEV_2' or 'DEV_2' is null then
-    raise_application_error(-20001, 'Must be run as DEV_2');
+  if user != 'WKSP_PROD1' or 'WKSP_PROD1' is null then
+    raise_application_error(-20001, 'Must be run as WKSP_PROD1');
   end if;
 end;
 /

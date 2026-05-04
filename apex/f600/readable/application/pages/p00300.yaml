@@ -1,10 +1,10 @@
 ---
-# ====== Page: Invoices ======================================
-id: 100
+# ====== Page: Recipiens =====================================
+id: 300
 identification: 
-  name: Invoices
-  alias: INVOICES
-  title: Invoices
+  name: Recipiens
+  alias: RECIPIENS
+  title: Recipiens
 
 appearance: 
   page-mode: Normal
@@ -37,35 +37,27 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Invoices ====================================
-  id: 78795188203686911
+- # ====== Region: Recipiens ===================================
+  id: 79397376326157649
   identification: 
-    name: Invoices
+    name: Recipiens
     type: Interactive Report
 
   source: 
     location: Local Database
     type: SQL Query
     sql-query: |
-      select i.invg_invoice_id
-           , i.invoice_number
-           , i.issue_date
-           , i.include_due_date_yn
-           , i.due_date
-           , i.payment_terms
-           , i.tax_rate
-           , i.other_amount
-           , i.notes
-           , i.invg_sender_id
-           , i.invg_recipient_id
-           , i.invg_bank_detail_id
-           , i.created_by
-           , i.created_on
-           , i.last_updated_by
-           , i.last_updated_on
-           , i.active_yn
-           , null printInvoice
-        from invg_invoices i
+      select r.invg_recipient_id
+           , r.name
+           , r.address
+           , r.email
+           , r.phone
+           , r.created_by
+           , r.created_on
+           , r.last_updated_by
+           , r.last_updated_on
+           , r.active_yn
+        from invg_recipients r
 
   layout: 
     sequence: 10
@@ -99,15 +91,15 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 78795227615686911
+    id: 79397427088157649
     link: 
       link-column: Link to Custom Target
       target: 
-        url: 'f?p=&APP_ID.:110:&APP_SESSION.::&DEBUG.:RP:P110_INVG_INVOICE_ID:\#INVG_INVOICE_ID#\'
-        page: 110 # Invoice
+        url: 'f?p=&APP_ID.:310:&APP_SESSION.::&DEBUG.:RP:P310_INVG_RECIPIENT_ID:\#INVG_RECIPIENT_ID#\'
+        page: 310 # Recipient
         clear-cache: RP
         values: 
-          p110_invg_invoice_id: '#INVG_INVOICE_ID#'
+          p310_invg_recipient_id: '#INVG_RECIPIENT_ID#'
 
       link-icon: <span role="img" aria-label="Edit" class="fa fa-edit" title="Edit"></span>
 
@@ -169,102 +161,20 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 78805179733685483
+      id: 79526742884100763
       identification: 
         name: Primary Report
-        alias: 788052
+        alias: 795268
 
     columns: 
-    - # ====== Column: INVG_SENDER_ID ==============================
-      id: 44565422549628440
-      identification: 
-        column-name: INVG_SENDER_ID
-        type: Plain Text (based on List of Values)
-
-      list-of-values: 
-        list-of-values: LOV_INVOICE_SENDER # 78780437001686924
-
-      heading: 
-        heading: Sender
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 190
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Use Named List of Values to Filter Exact Match
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
     - # ====== Column: INVG_RECIPIENT_ID ===========================
-      id: 44565522897628441
+      id: 79398130585157649
       identification: 
         column-name: INVG_RECIPIENT_ID
-        type: Plain Text (based on List of Values)
-
-      list-of-values: 
-        list-of-values: LOV_INVOICE_RECIPIENT # 78781193834686922
-
-      heading: 
-        heading: Recipient
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 200
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Use Named List of Values to Filter Exact Match
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-    - # ====== Column: INVG_INVOICE_ID =============================
-      id: 78795939500686905
-      identification: 
-        column-name: INVG_INVOICE_ID
         type: Hidden
 
       heading: 
-        heading: Invg Invoice ID
+        heading: Invg Recipient ID
 
       layout: 
         sequence: 0
@@ -275,21 +185,21 @@ regions:
       security: 
         escape-special-characters: true
 
-    - # ====== Column: INVOICE_NUMBER ==============================
-      id: 78796345404686903
+    - # ====== Column: NAME ========================================
+      id: 79398575665157649
       identification: 
-        column-name: INVOICE_NUMBER
+        column-name: NAME
         type: Plain Text
 
       heading: 
-        heading: Invoice Number
+        heading: Name
         alignment: start
 
       single-row-view: 
         use-column-heading: true
 
       layout: 
-        sequence: 40
+        sequence: 2
         column-alignment: start
 
       accessibility: 
@@ -316,63 +226,21 @@ regions:
       security: 
         escape-special-characters: true
 
-    - # ====== Column: ISSUE_DATE ==================================
-      id: 78796798472686903
+    - # ====== Column: ADDRESS =====================================
+      id: 79398919616157649
       identification: 
-        column-name: ISSUE_DATE
+        column-name: ADDRESS
         type: Plain Text
 
       heading: 
-        heading: Issue Date
+        heading: Address
         alignment: start
 
       single-row-view: 
         use-column-heading: true
 
       layout: 
-        sequence: 50
-        column-alignment: start
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Default Based on Column Type
-        date-ranges: All
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
-
-    - # ====== Column: INCLUDE_DUE_DATE_YN =========================
-      id: 78797153796686903
-      identification: 
-        column-name: INCLUDE_DUE_DATE_YN
-        type: Plain Text
-
-      heading: 
-        heading: 'Include Due Date '
-        alignment: start
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 60
+        sequence: 3
         column-alignment: start
 
       accessibility: 
@@ -399,63 +267,21 @@ regions:
       security: 
         escape-special-characters: true
 
-    - # ====== Column: DUE_DATE ====================================
-      id: 78797578216686903
+    - # ====== Column: EMAIL =======================================
+      id: 79399389518157648
       identification: 
-        column-name: DUE_DATE
+        column-name: EMAIL
         type: Plain Text
 
       heading: 
-        heading: Due Date
+        heading: Email
         alignment: start
 
       single-row-view: 
         use-column-heading: true
 
       layout: 
-        sequence: 70
-        column-alignment: start
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Default Based on Column Type
-        date-ranges: All
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
-
-    - # ====== Column: PAYMENT_TERMS ===============================
-      id: 78797978027686902
-      identification: 
-        column-name: PAYMENT_TERMS
-        type: Plain Text
-
-      heading: 
-        heading: Payment Terms
-        alignment: start
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 80
+        sequence: 4
         column-alignment: start
 
       accessibility: 
@@ -482,103 +308,21 @@ regions:
       security: 
         escape-special-characters: true
 
-    - # ====== Column: TAX_RATE ====================================
-      id: 78798344311686902
+    - # ====== Column: PHONE =======================================
+      id: 79399737606157648
       identification: 
-        column-name: TAX_RATE
+        column-name: PHONE
         type: Plain Text
 
       heading: 
-        heading: Tax Rate
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 90
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Default Based on Column Type
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
-
-    - # ====== Column: OTHER_AMOUNT ================================
-      id: 78798743543686902
-      identification: 
-        column-name: OTHER_AMOUNT
-        type: Plain Text
-
-      heading: 
-        heading: Other Amount
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 100
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Default Based on Column Type
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
-
-    - # ====== Column: NOTES =======================================
-      id: 78799108991686902
-      identification: 
-        column-name: NOTES
-        type: Plain Text
-
-      heading: 
-        heading: Notes
+        heading: Phone
         alignment: start
 
       single-row-view: 
         use-column-heading: true
 
       layout: 
-        sequence: 110
+        sequence: 5
         column-alignment: start
 
       accessibility: 
@@ -588,25 +332,25 @@ regions:
         primary-key: false
 
       column-filter: 
-        type: None
+        type: Default Based on Column Type
 
       enable-users-to: 
         hide: true
-        sort: false
+        sort: true
         filter: true
         highlight: true
-        control-break: false
-        aggregate: false
-        compute: false
-        chart: false
-        group-by: false
-        pivot: false
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
 
       security: 
         escape-special-characters: true
 
     - # ====== Column: CREATED_BY ==================================
-      id: 78800756302686901
+      id: 79400188713157648
       identification: 
         column-name: CREATED_BY
         type: Plain Text
@@ -619,7 +363,7 @@ regions:
         use-column-heading: true
 
       layout: 
-        sequence: 120
+        sequence: 6
         column-alignment: start
 
       accessibility: 
@@ -647,7 +391,7 @@ regions:
         escape-special-characters: true
 
     - # ====== Column: CREATED_ON ==================================
-      id: 78801131272686901
+      id: 79400573918157648
       identification: 
         column-name: CREATED_ON
         type: Plain Text
@@ -660,7 +404,7 @@ regions:
         use-column-heading: true
 
       layout: 
-        sequence: 130
+        sequence: 7
         column-alignment: start
 
       accessibility: 
@@ -692,7 +436,7 @@ regions:
         escape-special-characters: true
 
     - # ====== Column: LAST_UPDATED_BY =============================
-      id: 78801557411686901
+      id: 79400973635157648
       identification: 
         column-name: LAST_UPDATED_BY
         type: Plain Text
@@ -705,7 +449,7 @@ regions:
         use-column-heading: true
 
       layout: 
-        sequence: 140
+        sequence: 8
         column-alignment: start
 
       accessibility: 
@@ -733,7 +477,7 @@ regions:
         escape-special-characters: true
 
     - # ====== Column: LAST_UPDATED_ON =============================
-      id: 78801935923686900
+      id: 79401376674157647
       identification: 
         column-name: LAST_UPDATED_ON
         type: Plain Text
@@ -746,7 +490,7 @@ regions:
         use-column-heading: true
 
       layout: 
-        sequence: 150
+        sequence: 9
         column-alignment: start
 
       accessibility: 
@@ -775,7 +519,7 @@ regions:
         escape-special-characters: true
 
     - # ====== Column: ACTIVE_YN ===================================
-      id: 78802394183686900
+      id: 79401718788157647
       identification: 
         column-name: ACTIVE_YN
         type: Y_N
@@ -791,7 +535,7 @@ regions:
         value: ACTIVE_YN
 
       layout: 
-        sequence: 160
+        sequence: 10
         column-alignment: center
 
       accessibility: 
@@ -802,98 +546,6 @@ regions:
 
       enable-users-to: 
         hide: true
-
-    - # ====== Column: INVG_BANK_DETAIL_ID =========================
-      id: 79260617579559842
-      identification: 
-        column-name: INVG_BANK_DETAIL_ID
-        type: Plain Text (based on List of Values)
-
-      list-of-values: 
-        list-of-values: INVG_BANK_DETAILS.RECEIVER_NAME # 78781804473686922
-
-      heading: 
-        heading: Bank Detail
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 30
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Use Named List of Values to Filter Exact Match
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-    - # ====== Column: PRINTINVOICE ================================
-      id: 79260750313559843
-      identification: 
-        column-name: PRINTINVOICE
-        type: Link
-
-      heading: 
-        heading: Printinvoice
-        alignment: start
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 180
-        column-alignment: start
-
-      accessibility: 
-        value-identifies-row: false
-
-      link: 
-        target: 
-          url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:120:P120_INVG_INVOICE_ID:#INVG_INVOICE_ID#'
-          page: 120 # Print Invoice
-          clear-cache: 120
-          values: 
-            p120_invg_invoice_id: '#INVG_INVOICE_ID#'
-
-        link-text: Print
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Default Based on Column Type
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
 
     printing: 
       output: 
@@ -915,7 +567,7 @@ regions:
         font-size: 12
         font-color: '#000000'
         alignment: center
-        page-header-text: Invoices
+        page-header-text: Recipiens
 
       column-headings: 
         font: Helvetica
@@ -939,7 +591,7 @@ regions:
         alignment: center
 
 - # ====== Region: Breadcrumb ==================================
-  id: 78804388552686897
+  id: 79403869071157646
   identification: 
     name: Breadcrumb
     type: Breadcrumb
@@ -983,14 +635,14 @@ regions:
 
 buttons: 
 - # ====== Button: CREATE ======================================
-  id: 78802864762686900
+  id: 79402228596157647
   identification: 
     button-name: CREATE
     label: Create
 
   layout: 
     sequence: 10
-    region: Invoices # 78795188203686911
+    region: Recipiens # 79397376326157649
     slot: RIGHT_OF_IR_SEARCH_BAR
     start-new-layout: false
     start-new-row: true
@@ -1007,15 +659,15 @@ buttons:
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:110:&APP_SESSION.::&DEBUG.:110::'
-      page: 110 # Invoice
-      clear-cache: 110
+      url: 'f?p=&APP_ID.:310:&APP_SESSION.::&DEBUG.:310::'
+      page: 310 # Recipient
+      clear-cache: 310
 
     warn-on-unsaved-changes: Do Not Check
 
 dynamic-actions: 
 - # ====== Dynamic Action: Edit Report - Dialog Closed =========
-  id: 78803148520686899
+  id: 79402510686157646
   identification: 
     name: Edit Report - Dialog Closed
 
@@ -1027,11 +679,11 @@ dynamic-actions:
   when: 
     event: Dialog Closed
     selection-type: Region
-    region: Invoices # 78795188203686911
+    region: Recipiens # 79397376326157649
 
   actions: 
   - # ====== Action: Refresh =====================================
-    id: 78803679871686898
+    id: 79403041793157646
     identification: 
       action: Refresh
 
@@ -1040,11 +692,11 @@ dynamic-actions:
 
     affected-elements: 
       selection-type: Region
-      region: Invoices # 78795188203686911
+      region: Recipiens # 79397376326157649
 
     execution: 
       sequence: 10
-      event: Edit Report - Dialog Closed # 78803148520686899
+      event: Edit Report - Dialog Closed # 79402510686157646
       fire-when-event-result-is: True
       fire-on-initialization: false
 
