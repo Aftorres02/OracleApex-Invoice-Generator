@@ -5,7 +5,7 @@
     name: Navigation Menu
 
   subscription: 
-    version-number: 41749427709140
+    version-number: 41749839755974
 
   source: 
     type: Static Values
@@ -57,6 +57,90 @@
       target: 
         url: 'f?p=&APP_ID.:100:&APP_SESSION.::&DEBUG.:::'
         page: 100 # Invoices
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Banks ========================================
+    id: 79362513898711813
+    label: 
+      label: Banks
+
+    icon: 
+      image/icon-css-classes: fa-university
+
+    layout: 
+      sequence: 30
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 200
+      - 210
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:200:&APP_SESSION.::&DEBUG.:::'
+        page: 200 # Banks
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Recipiens ====================================
+    id: 79396985330157650
+    label: 
+      label: Recipiens
+
+    icon: 
+      image/icon-css-classes: fa-building-o
+
+    layout: 
+      sequence: 40
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 300
+      - 310
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:300:&APP_SESSION.::&DEBUG.:::'
+        page: 300 # Recipiens
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Senders ======================================
+    id: 79517826323106454
+    label: 
+      label: Senders
+
+    icon: 
+      image/icon-css-classes: fa-users
+
+    layout: 
+      sequence: 50
+
+    is-current: 
+      type: Pages
+      pages: 
+      - 400
+      - 410
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:400:&APP_SESSION.::&DEBUG.:::'
+        page: 400 # Senders
 
     click-counting: 
       count-clicks: false

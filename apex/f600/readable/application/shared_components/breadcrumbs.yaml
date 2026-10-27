@@ -50,3 +50,45 @@
         url: 'f?p=&APP_ID.:120:&APP_SESSION.::&DEBUG.:::'
         page: 120 # Print Invoice
 
+  - # ====== Entry: Banks ========================================
+    id: 79370157899711798
+    identification: 
+      name: Banks
+      page-number: 200
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:200:&APP_SESSION.::&DEBUG.:::'
+        page: 200 # Banks
+
+  - # ====== Entry: Recipiens ====================================
+    id: 79403704586157646
+    identification: 
+      name: Recipiens
+      page-number: 300
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:300:&APP_SESSION.::&DEBUG.:::'
+        page: 300 # Recipiens
+
+  - # ====== Entry: Senders ======================================
+    id: 79524630743106451
+    identification: 
+      name: Senders
+      page-number: 400
+
+    execution: 
+      sequence: 10
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:400:&APP_SESSION.::&DEBUG.:::'
+        page: 400 # Senders
+

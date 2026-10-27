@@ -1,0 +1,74 @@
+---
+- # ====== Plugin: Y_N =========================================
+  id: 176647363897701872
+  identification: 
+    name: Y_N
+    internal-name: Y_N
+    type: Template Component
+
+  advanced: 
+    quick-pick: false
+
+  subscription: 
+    version-number: 41738715778337
+
+  templates: 
+    available-as: 
+    - Single (Partial)
+    partial: |
+      {if APEX$IS_LAZY_LOADING/}
+        <div>#VALUE#</div>
+         
+      {else/}
+       
+        {if ?VALUE/}
+      
+            {case VALUE/}
+              {when Y/} <span class="icon-check" title="#VALUE#">✓</span>
+      
+              {when N/} <span class="icon-x">✗</span>
+              {otherwise/}
+            {endcase/}
+          
+        {endif/}
+       
+      
+      {endif/}
+    translate-templates: false
+    default-escape-mode: HTML
+
+  callbacks: 
+    api-interface: Function
+
+  custom-attributes: 
+    substitute-attribute-values: true
+
+  css: 
+    file-urls: 
+    - '#WORKSPACE_FILES#css/y_n#MIN#.css'
+
+  information: 
+    version: 1.0
+
+  custom-attributes: 
+  - # ====== Custom Attribute: Value =============================
+    id: 176806439458207784
+    identification: 
+      static-id: VALUE
+      attribute: 3
+      name: Value
+      scope: Component
+
+    layout: 
+      sequence: 30
+
+    settings: 
+      type: Session State Value
+      common: true
+      show-in-wizard: true
+      required: true
+      translatable: false
+      data-types: 
+      - Varchar2
+      escape-mode: HTML
+

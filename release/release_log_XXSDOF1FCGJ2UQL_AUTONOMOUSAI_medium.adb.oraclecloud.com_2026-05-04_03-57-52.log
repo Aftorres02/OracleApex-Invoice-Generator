@@ -1,0 +1,16 @@
+Log File: release_log_XXSDOF1FCGJ2UQL_AUTONOMOUSAI_medium.adb.oraclecloud.com_2026-05-04_03-57-52.log
+check DB user is expected user
+User: WKSP_PROD1
+
+declare
+*
+ERROR at line 1:
+ORA-20001: Must be run as DEV_2
+ORA-06512: at line 5
+
+https://docs.oracle.com/error-help/db/ora-20001/
+
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-20001/
+https://docs.oracle.com/error-help/db/ora-06512/

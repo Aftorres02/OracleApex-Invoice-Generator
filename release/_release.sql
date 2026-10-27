@@ -13,7 +13,7 @@ set verify off
 -- feedback - Displays the number of records returned by a script ON=1
 set feedback on
 -- timing - Displays the time that commands take to complete
-set timing on
+--set timing on
 -- display dbms_output messages
 set serveroutput on
 -- disables blank lines in code
@@ -38,8 +38,8 @@ prompt check DB user is expected user
 declare
 begin
   dbms_output.put_line('User: ' || user);
-  if user != 'DEV_2' or 'DEV_2' is null then
-    raise_application_error(-20001, 'Must be run as DEV_2');
+  if user != 'WKSP_PROD1' or 'WKSP_PROD1' is null then
+    raise_application_error(-20001, 'Must be run as WKSP_PROD1');
   end if;
 end;
 /
@@ -53,7 +53,7 @@ end;
 
 -- *** Release specific tasks ***
 
---@code/_run_code.sql
+@code/_run_code.sql
 
 -- *** DO NOT MODIFY BELOW ***
 
@@ -101,7 +101,7 @@ end;
 
 -- *** APEX ***
 -- Install all apex applications
-@all_apex.sql
+--@all_apex.sql
 
 
 -- Control Build Options (optional)

@@ -56,8 +56,8 @@ regions:
            , i.tax_rate
            , i.other_amount
            , i.notes
-           , i.invg_client_id
-           , i.invg_business_id
+           , i.invg_sender_id
+           , i.invg_recipient_id
            , i.invg_bank_detail_id
            , i.created_by
            , i.created_on
@@ -175,6 +175,88 @@ regions:
         alias: 788052
 
     columns: 
+    - # ====== Column: INVG_SENDER_ID ==============================
+      id: 44565422549628440
+      identification: 
+        column-name: INVG_SENDER_ID
+        type: Plain Text (based on List of Values)
+
+      list-of-values: 
+        list-of-values: LOV_INVOICE_SENDER # 78780437001686924
+
+      heading: 
+        heading: Sender
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 190
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Use Named List of Values to Filter Exact Match
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
+    - # ====== Column: INVG_RECIPIENT_ID ===========================
+      id: 44565522897628441
+      identification: 
+        column-name: INVG_RECIPIENT_ID
+        type: Plain Text (based on List of Values)
+
+      list-of-values: 
+        list-of-values: LOV_INVOICE_RECIPIENT # 78781193834686922
+
+      heading: 
+        heading: Recipient
+        alignment: end
+
+      single-row-view: 
+        use-column-heading: true
+
+      layout: 
+        sequence: 200
+        column-alignment: end
+
+      accessibility: 
+        value-identifies-row: false
+
+      source: 
+        primary-key: false
+
+      column-filter: 
+        type: Use Named List of Values to Filter Exact Match
+
+      enable-users-to: 
+        hide: true
+        sort: true
+        filter: true
+        highlight: true
+        control-break: true
+        aggregate: true
+        compute: true
+        chart: true
+        group-by: true
+        pivot: true
+
     - # ====== Column: INVG_INVOICE_ID =============================
       id: 78795939500686905
       identification: 
@@ -696,7 +778,7 @@ regions:
       id: 78802394183686900
       identification: 
         column-name: ACTIVE_YN
-        type: Plain Text
+        type: Y_N
 
       heading: 
         heading: 'Active '
@@ -705,9 +787,12 @@ regions:
       single-row-view: 
         use-column-heading: true
 
+      settings: 
+        value: ACTIVE_YN
+
       layout: 
         sequence: 160
-        column-alignment: start
+        column-alignment: center
 
       accessibility: 
         value-identifies-row: false
@@ -715,105 +800,8 @@ regions:
       source: 
         primary-key: false
 
-      column-filter: 
-        type: Default Based on Column Type
-
       enable-users-to: 
         hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-      security: 
-        escape-special-characters: true
-
-    - # ====== Column: INVG_CLIENT_ID ==============================
-      id: 79260481207559840
-      identification: 
-        column-name: INVG_CLIENT_ID
-        type: Plain Text (based on List of Values)
-
-      list-of-values: 
-        list-of-values: INVG_CLIENTS.NAME # 78780437001686924
-
-      heading: 
-        heading: Client
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 10
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Use Named List of Values to Filter Exact Match
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
-
-    - # ====== Column: INVG_BUSINESS_ID ============================
-      id: 79260595703559841
-      identification: 
-        column-name: INVG_BUSINESS_ID
-        type: Plain Text (based on List of Values)
-
-      list-of-values: 
-        list-of-values: INVG_BUSINESSES.NAME # 78781193834686922
-
-      heading: 
-        heading: Business
-        alignment: end
-
-      single-row-view: 
-        use-column-heading: true
-
-      layout: 
-        sequence: 20
-        column-alignment: end
-
-      accessibility: 
-        value-identifies-row: false
-
-      source: 
-        primary-key: false
-
-      column-filter: 
-        type: Use Named List of Values to Filter Exact Match
-
-      enable-users-to: 
-        hide: true
-        sort: true
-        filter: true
-        highlight: true
-        control-break: true
-        aggregate: true
-        compute: true
-        chart: true
-        group-by: true
-        pivot: true
 
     - # ====== Column: INVG_BANK_DETAIL_ID =========================
       id: 79260617579559842

@@ -62,3 +62,12 @@
     mime-type: text/css
     file-character-set: Unicode UTF-8
 
+- # ====== Static Application File: css/y_n.css ================
+  id: 79854220984231032
+  identification: 
+    file-name: css/y_n.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+

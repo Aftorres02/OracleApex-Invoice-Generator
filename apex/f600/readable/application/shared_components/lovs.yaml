@@ -1,40 +1,40 @@
 ---
-- # ====== List of Values: INVG_CLIENTS.NAME ===================
+- # ====== List of Values: LOV_INVOICE_SENDER ==================
   id: 78780437001686924
   identification: 
-    name: INVG_CLIENTS.NAME
+    name: LOV_INVOICE_SENDER
 
   subscription: 
-    version-number: 41749427708875
+    version-number: 41749838172870
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: INVG_CLIENTS
+    table-name: INVG_SENDERS
 
   column-mapping: 
-    return: INVG_CLIENT_ID
+    return: INVG_SENDER_ID
     display: NAME
     default-sort: NAME
     sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: INVG_BUSINESSES.NAME ================
+- # ====== List of Values: LOV_INVOICE_RECIPIENT ===============
   id: 78781193834686922
   identification: 
-    name: INVG_BUSINESSES.NAME
+    name: LOV_INVOICE_RECIPIENT
 
   subscription: 
-    version-number: 41749427708882
+    version-number: 41749838137076
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: INVG_BUSINESSES
+    table-name: INVG_RECIPIENTS
 
   column-mapping: 
-    return: INVG_BUSINESS_ID
+    return: INVG_RECIPIENT_ID
     display: NAME
     default-sort: NAME
     sort-direction: Ascending (Nulls Last)

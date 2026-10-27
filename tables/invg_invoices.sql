@@ -1,5 +1,5 @@
 -- =============================================================================
--- invg_invoices - Invoice header; references client, business, bank by ID
+-- invg_invoices - Invoice header; references recipient, sender, bank by ID
 -- =============================================================================
 
 create table invg_invoices (
@@ -12,8 +12,8 @@ create table invg_invoices (
 , tax_rate            number(5,2) default 0
 , other_amount        number(18,2) default 0
 , notes               clob
-, invg_client_id      number
-, invg_business_id    number
+, invg_recipient_id   number
+, invg_sender_id      number
 , invg_bank_detail_id number
 , created_by          varchar2(60 char) default
                       coalesce(
@@ -28,14 +28,14 @@ create table invg_invoices (
 , active_yn           varchar2(1 char) default 'Y' not null
 , constraint ck_invg_invoices_active_yn check (active_yn in ('Y', 'N'))
 , constraint ck_invg_invoices_include_due_date_yn check (include_due_date_yn in ('Y', 'N'))
-, constraint fk_invg_invoices_client foreign key (invg_client_id) references invg_clients (invg_client_id)
-, constraint fk_invg_invoices_business foreign key (invg_business_id) references invg_businesses (invg_business_id)
+, constraint fk_invg_invoices_recipient foreign key (invg_recipient_id) references invg_recipients (invg_recipient_id)
+, constraint fk_invg_invoices_sender foreign key (invg_sender_id) references invg_senders (invg_sender_id)
 , constraint fk_invg_invoices_bank_detail foreign key (invg_bank_detail_id) references invg_bank_details (invg_bank_detail_id)
 );
 
 create unique index uk_invg_invoices_number on invg_invoices (invoice_number);
 
 begin
-  execute immediate 'comment on table invg_invoices is ''Invoice header; references client, business, bank by ID.''';
+  execute immediate 'comment on table invg_invoices is ''Invoice header; references recipient, sender, bank by ID.''';
 end;
 /
